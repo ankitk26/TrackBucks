@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "902514654621",
+    "project_id": "trackbucks",
+    "storage_bucket": "trackbucks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902514654621:android:6e787e5418be5aaf84c374",
+        "android_client_info": {
+          "package_name": "com.example.trackbucks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902514654621-muo5eo3naapeum4vuvisj7igpg1iirvm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.trackbucks",
+            "certificate_hash": "d0b9a39d525f0d6391788cb1aabde62b17b0b56b"
+          }
+        },
+        {
+          "client_id": "902514654621-64falal3ucojt0j4f5nomi3jvqk1l458.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJKKGEyfV3ePGeGLmupiZUJarYpvxmQIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902514654621-1nful5p5bpgrqoeemflibh3kok99bkgj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "902514654621-234l9p2u4i56vo7tv2n989t8kdme473n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.trackbucks"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
