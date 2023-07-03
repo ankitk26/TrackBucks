@@ -1,7 +1,7 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:trackbucks/data/constants.dart';
-import 'package:trackbucks/firebase_options.dart';
 import 'package:trackbucks/screens/add_transaction_screen.dart';
 import 'package:trackbucks/screens/home_screen.dart';
 import 'package:trackbucks/screens/monthly_transactions.dart';
@@ -9,8 +9,10 @@ import 'package:trackbucks/utils/generate_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  await dotenv.load();
+  await Supabase.initialize(
+    url: dotenv.get('SUPABASE_URL'),
+    anonKey: dotenv.get('SUPABASE_KEY'),
   );
   runApp(const MyApp());
 }

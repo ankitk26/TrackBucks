@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:trackbucks/data/constants.dart';
-import 'package:trackbucks/models/transaction.dart';
-import 'package:trackbucks/screens/add_transaction_screen.dart';
-import 'package:trackbucks/screens/monthly_transactions.dart';
+import 'package:trackbucks/models/transaction_list.dart';
 import 'package:trackbucks/screens/screens.dart';
 import 'package:trackbucks/services/transaction_service.dart';
-import 'package:trackbucks/utils/utils.dart';
+import 'package:trackbucks/utils/currency_formatter.dart';
 import 'package:trackbucks/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -71,8 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {},
         ),
       ),
-      body: StreamBuilder(
-        stream: TransactionService().allTransactions,
+      body: FutureBuilder(
+        future: TransactionService().allTransactions,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -94,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           final transactions =
-              data.docs.map((doc) => TransactionModel.fromJson(doc.data()));
+              TransactionListModel.fromJson(snapshot.data).transactions;
 
           if (transactions.isEmpty) {
             return const Center(
@@ -107,16 +105,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
           final todayTotalTransactionsAmount = transactions
               .where((element) =>
-                  DateFormat("ddMMyyyy")
-                      .format(element.transactionDate.toDate()) ==
+                  DateFormat("ddMMyyyy").format(element.transactionDate) ==
                   DateFormat("ddMMyyyy").format(DateTime.now()))
               .fold<double>(0,
                   (previousValue, element) => previousValue + element.amount);
 
           final monthTotalTransactionsAmount = transactions
               .where((element) =>
-                  element.transactionDate.toDate().month == currentMonth &&
-                  element.transactionDate.toDate().year == currentYear)
+                  element.transactionDate.month == currentMonth &&
+                  element.transactionDate.year == currentYear)
               .fold<double>(0,
                   (previousValue, element) => previousValue + element.amount);
 
@@ -155,7 +152,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
                   ),
-                  // const SizedBox(height: 8.0),
                   Divider(
                     color: Colors.grey[400],
                   ),
