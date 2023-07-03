@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:trackbucks/data/constants.dart';
 import 'package:trackbucks/screens/add_transaction_screen.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: appPaper,
           ),
           dividerColor: Colors.grey,
+          textTheme: GoogleFonts.workSansTextTheme(ThemeData.dark().textTheme),
         ),
         home: const HomeScreen(),
         onGenerateRoute: generateRoutes,

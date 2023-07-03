@@ -40,7 +40,7 @@ class TransactionItem extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 8.0),
+          const SizedBox(width: 16.0),
           Text(
             formattedAmount,
             style: const TextStyle(
