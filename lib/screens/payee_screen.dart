@@ -28,21 +28,30 @@ class PayeeScreen extends StatelessWidget {
               future: TransactionService().transactionsByUpi(upiId),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return const Padding(
+                    padding: EdgeInsets.only(top: 32.0),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                 }
 
                 if (snapshot.hasError) {
-                  return const Center(
-                    child: Text("Some error occured. Try again later"),
+                  return const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Center(
+                      child: Text("Some error occured. Try again later"),
+                    ),
                   );
                 }
 
                 final data = snapshot.data;
                 if (data == null) {
-                  return const Center(
-                    child: Text("Nothing to show"),
+                  return const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Center(
+                      child: Text("Nothing to show"),
+                    ),
                   );
                 }
 
@@ -71,23 +80,15 @@ class PayeeScreen extends StatelessWidget {
                           cardColor: appBlue,
                         ),
                         const SizedBox(height: 16.0),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: PaperCard(
-                                title: "Total Payments",
-                                value: totalTransactions.toString(),
-                              ),
-                            ),
-                            const SizedBox(width: 16.0),
-                            Expanded(
-                              child: PaperCard(
-                                title: "Average Expense",
-                                value: currencyFormatter(
-                                    totalTransactionAmount / totalTransactions),
-                              ),
-                            ),
-                          ],
+                        PaperCard(
+                          title: "Total Payments",
+                          value: totalTransactions.toString(),
+                        ),
+                        const SizedBox(height: 16.0),
+                        PaperCard(
+                          title: "Average Expense",
+                          value: currencyFormatter(
+                              totalTransactionAmount / totalTransactions),
                         ),
                         const SizedBox(height: 28.0),
                         const Text(
