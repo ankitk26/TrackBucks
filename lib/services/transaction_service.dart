@@ -1,27 +1,28 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:trackbucks/data/constants.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class TransactionService {
-  final _transcations = FirebaseFirestore.instance.collection('transactions');
+  final _supabase = Supabase.instance.client;
 
-  FirestoreSnapshots get allTransactions =>
-      _transcations.orderBy("TransactionDate", descending: true).snapshots();
+  PostgrestTransformBuilder get allTransactions => _supabase
+      .from('transactions')
+      .select('*')
+      .order('transaction_date', ascending: false);
 
-  FirestoreSnapshots transactionsByUpi(String upiId) => _transcations
-      .where("ReceiverUPI", isEqualTo: upiId)
-      .orderBy("TransactionDate", descending: true)
-      .snapshots();
+  PostgrestTransformBuilder transactionsByUpi(String upiId) => _supabase
+      .from('transactions')
+      .select('*')
+      .eq('receiver_upi', upiId)
+      .order('transaction_date', ascending: false);
 
-  FirestoreSnapshots transactionsByMonth(int month, int year) {
+  PostgrestTransformBuilder transactionsByMonth(int month, int year) {
     final firstDayOfMonth = DateTime(year, month);
     final lastDayOfMonth = DateTime(year, month + 1, 0);
 
-    print("$firstDayOfMonth $lastDayOfMonth");
-
-    return _transcations
-        .where("TransactionDate", isGreaterThanOrEqualTo: firstDayOfMonth)
-        .where("TransactionDate", isLessThanOrEqualTo: lastDayOfMonth)
-        .orderBy("TransactionDate", descending: true)
-        .snapshots();
+    return _supabase
+        .from('transactions')
+        .select('*')
+        .gte('transaction_date', firstDayOfMonth)
+        .lte('transaction_date', lastDayOfMonth)
+        .order('transaction_date', ascending: false);
   }
 }

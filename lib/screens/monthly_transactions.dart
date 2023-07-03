@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trackbucks/data/constants.dart';
-import 'package:trackbucks/models/transaction.dart';
+import 'package:trackbucks/models/transaction_list.dart';
 import 'package:trackbucks/screens/screens.dart';
 import 'package:trackbucks/services/transaction_service.dart';
 import 'package:trackbucks/utils/utils.dart';
@@ -72,8 +72,8 @@ class _MonthlyTransactionsExpensesState
                 ],
               ),
               const SizedBox(height: 16.0),
-              StreamBuilder(
-                stream: TransactionService().transactionsByMonth(
+              FutureBuilder(
+                future: TransactionService().transactionsByMonth(
                   currentMonth,
                   int.parse(currentYear),
                 ),
@@ -97,8 +97,8 @@ class _MonthlyTransactionsExpensesState
                     );
                   }
 
-                  final transactions = data.docs
-                      .map((doc) => TransactionModel.fromJson(doc.data()));
+                  final transactions =
+                      TransactionListModel.fromJson(data).transactions;
 
                   if (transactions.isEmpty) {
                     return const Center(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trackbucks/data/constants.dart';
-import 'package:trackbucks/models/transaction.dart';
+import 'package:trackbucks/models/transaction_list.dart';
 import 'package:trackbucks/services/transaction_service.dart';
 import 'package:trackbucks/utils/utils.dart';
 import 'package:trackbucks/widgets/widgets.dart';
@@ -24,8 +24,8 @@ class PayeeScreen extends StatelessWidget {
                 fontSize: 16.0,
               ),
             ),
-            StreamBuilder(
-              stream: TransactionService().transactionsByUpi(upiId),
+            FutureBuilder(
+              future: TransactionService().transactionsByUpi(upiId),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
@@ -46,8 +46,8 @@ class PayeeScreen extends StatelessWidget {
                   );
                 }
 
-                final transactions = data.docs
-                    .map((doc) => TransactionModel.fromJson(doc.data()));
+                final transactions =
+                    TransactionListModel.fromJson(data).transactions;
 
                 if (transactions.isEmpty) {
                   return const Center(

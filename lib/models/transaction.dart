@@ -1,11 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class TransactionModel {
   double amount;
   String payeeName;
   String receiverUpi;
   String senderUpi;
-  Timestamp transactionDate;
+  DateTime transactionDate;
   int upiRefId;
 
   TransactionModel({
@@ -19,20 +17,20 @@ class TransactionModel {
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
       TransactionModel(
-        amount: json["Amount"]?.toDouble(),
-        payeeName: json["PayeeName"],
-        receiverUpi: json["ReceiverUPI"],
-        senderUpi: json["SenderUPI"],
-        transactionDate: json["TransactionDate"],
-        upiRefId: json["UPIRefId"],
+        amount: json["amount"]?.toDouble(),
+        payeeName: json["payee_name"],
+        receiverUpi: json["receiver_upi"],
+        senderUpi: json["sender_upi"],
+        transactionDate: DateTime.parse(json["transaction_date"]),
+        upiRefId: json["upi_ref_id"],
       );
 
   Map<String, dynamic> toJson() => {
-        "Amount": amount,
-        "PayeeName": payeeName,
-        "ReceiverUPI": receiverUpi,
-        "SenderUPI": senderUpi,
-        "TransactionDate": transactionDate,
-        "UPIRefId": upiRefId,
+        "amount": amount,
+        "payee_name": payeeName,
+        "receiver_upi": receiverUpi,
+        "sender_upi": senderUpi,
+        "transaction_date": transactionDate.toIso8601String(),
+        "upi_ref_id": upiRefId,
       };
 }
