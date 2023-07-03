@@ -3,9 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:trackbucks/data/constants.dart';
-import 'package:trackbucks/screens/add_transaction_screen.dart';
-import 'package:trackbucks/screens/home_screen.dart';
-import 'package:trackbucks/screens/monthly_transactions.dart';
+import 'package:trackbucks/screens/screens.dart';
 import 'package:trackbucks/utils/generate_routes.dart';
 
 void main() async {
