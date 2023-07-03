@@ -1,15 +1,13 @@
-import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter/material.dart";
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:trackbucks/models/month.dart";
 
-const myUpi = '9723750157@paytm';
+final myUpi = dotenv.get('UPI');
 
 const appBlue = Color(0xff4339D7);
 const appGreen = Color(0xffCAFAC4);
 const appPaper = Color(0xff181818);
 const appBlack = Colors.black;
-
-typedef FirestoreSnapshots = Stream<QuerySnapshot<Map<String, dynamic>>>;
 
 final years = MonthModel(monthName: '2023', monthNumber: 2023);
 
