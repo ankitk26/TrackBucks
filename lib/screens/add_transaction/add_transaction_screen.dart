@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:trackbucks/data/constants.dart';
-import 'package:trackbucks/widgets/widgets.dart';
+import 'package:trackbucks/config/config.dart';
+
+import 'widgets/widgets.dart';
 
 class AddTransactionScreen extends StatefulWidget {
   const AddTransactionScreen({super.key});

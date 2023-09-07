@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:trackbucks/data/constants.dart';
+import 'package:trackbucks/config/config.dart';
 import 'package:trackbucks/screens/screens.dart';
-import 'package:trackbucks/utils/generate_routes.dart';
+import 'package:trackbucks/utils/utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +13,7 @@ void main() async {
     url: dotenv.get('SUPABASE_URL'),
     anonKey: dotenv.get('SUPABASE_KEY'),
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -24,22 +24,12 @@ class MyApp extends StatelessWidget {
     return SafeArea(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: appBlack,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: appBlack,
-          ),
-          drawerTheme: const DrawerThemeData(
-            backgroundColor: appPaper,
-          ),
-          dividerColor: Colors.grey,
-          textTheme: GoogleFonts.workSansTextTheme(ThemeData.dark().textTheme),
-        ),
+        theme: appTheme,
         home: const HomeScreen(),
         onGenerateRoute: generateRoutes,
         routes: {
-          MonthlyTransactionsExpenses.path: (context) =>
-              const MonthlyTransactionsExpenses(),
+          MonthlyTransactionsScreen.path: (context) =>
+              const MonthlyTransactionsScreen(),
           AddTransactionScreen.path: (context) => const AddTransactionScreen(),
         },
       ),

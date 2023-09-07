@@ -1,20 +1,27 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
+// ignore: implementation_imports
+import 'package:supabase/src/supabase_stream_builder.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class TransactionService {
   final _supabase = Supabase.instance.client;
 
-  PostgrestTransformBuilder get allTransactions => _supabase
+  SupabaseStreamBuilder get allTransactions => _supabase
       .from('transactions')
-      .select('*')
-      .order('transaction_date', ascending: false);
+      .stream(primaryKey: ['upi_ref_id']).order('transaction_date',
+          ascending: false);
 
-  PostgrestTransformBuilder transactionsByUpi(String upiId) => _supabase
+  SupabaseStreamBuilder getTransactionsByUpi(String upiId) => _supabase
       .from('transactions')
-      .select('*')
+      .stream(primaryKey: ['upi_ref_id'])
       .eq('receiver_upi', upiId)
       .order('transaction_date', ascending: false);
 
-  PostgrestTransformBuilder transactionsByMonth(int month, int year) {
+  PostgrestFilterBuilder getTransactionTotals() =>
+      _supabase.rpc('get_transaction_totals');
+
+  getTransactionsByMonth(int year, int month) {
     final firstDayOfMonth = DateTime(year, month);
     final lastDayOfMonth = DateTime(year, month + 1, 0);
 
@@ -25,4 +32,22 @@ class TransactionService {
         .lte('transaction_date', lastDayOfMonth)
         .order('transaction_date', ascending: false);
   }
+
+  Future<void> fetchNewTransactions() async {
+    try {
+      await http.post(
+        Uri.parse("https://upi-transactions-api.vercel.app/new-transactions"),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      );
+      print('refreshed');
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  final transactionProvider = StreamProvider((ref) async* {
+    yield TransactionService().allTransactions;
+  });
 }

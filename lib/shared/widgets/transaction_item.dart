@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:trackbucks/data/constants.dart';
+import 'package:trackbucks/config/constants.dart';
 import 'package:trackbucks/models/transaction.dart';
 import 'package:trackbucks/utils/currency_formatter.dart';
 
@@ -12,7 +12,7 @@ class TransactionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final amountPrefix = transaction.senderUpi == myUpi ? -1 : 1;
-    final formattedAmount =
+    final formattedAmount = (amountPrefix == 1 ? "+" : "") +
         currencyFormatter(transaction.amount * amountPrefix);
 
     return Padding(
@@ -26,7 +26,9 @@ class TransactionItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  transaction.payeeName,
+                  amountPrefix == 1
+                      ? transaction.senderUpi
+                      : transaction.payeeName,
                   style: const TextStyle(
                     fontSize: 15.0,
                   ),
@@ -43,9 +45,10 @@ class TransactionItem extends StatelessWidget {
           const SizedBox(width: 16.0),
           Text(
             formattedAmount,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 16.0,
+              color: amountPrefix == -1 ? Colors.grey[300] : Colors.green[300],
             ),
           ),
         ],

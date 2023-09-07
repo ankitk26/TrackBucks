@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trackbucks/data/constants.dart';
+import 'package:trackbucks/config/config.dart';
 
 class TransactionTypeContainer extends StatelessWidget {
   const TransactionTypeContainer({
@@ -20,8 +20,9 @@ class TransactionTypeContainer extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color:
-              selectedTransactionType == transactionType ? appGreen : appPaper,
+          color: selectedTransactionType == transactionType
+              ? appGreen
+              : Palette.secondary,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(

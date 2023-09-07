@@ -38,6 +38,11 @@ dependencies:
   supabase_flutter: ^1.6.2
   flutter_dotenv: ^5.1.0
   google_fonts: ^5.1.0
+  supabase: ^1.9.7
+  http: ^1.1.0
+  flutter_riverpod: ^2.3.7
+  fl_chart: ^0.63.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
