@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trackbucks/screens/insights/insights_screen.dart';
 import 'package:trackbucks/screens/screens.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -15,7 +16,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            title: const Text("Monthly Expanses"),
+            title: const Text("Monthly Expenses"),
             onTap: () {
               Navigator.of(context)
                   .popAndPushNamed(MonthlyTransactionsScreen.path);
@@ -24,7 +25,7 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             title: const Text("Insights"),
             onTap: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).popAndPushNamed(InsightsScreen.path);
             },
           ),
         ],

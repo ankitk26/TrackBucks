@@ -24,7 +24,7 @@ class HomeScreen extends ConsumerWidget {
       key: drawerKey,
       drawer: const CustomDrawer(),
       appBar: AppBar(
-        title: const Text("trackbucks", style: TextStyle(fontSize: 16)),
+        title: const Text("Trackbucks", style: TextStyle(fontSize: 16)),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.menu),
@@ -32,12 +32,6 @@ class HomeScreen extends ConsumerWidget {
             drawerKey.currentState!.openDrawer();
           },
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {

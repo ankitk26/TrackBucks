@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         home: const HomeScreen(),
         onGenerateRoute: generateRoutes,
         routes: {
+          InsightsScreen.path: (context) => const InsightsScreen(),
           MonthlyTransactionsScreen.path: (context) =>
               const MonthlyTransactionsScreen(),
           AddTransactionScreen.path: (context) => const AddTransactionScreen(),

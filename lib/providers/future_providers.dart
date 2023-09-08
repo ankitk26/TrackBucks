@@ -15,3 +15,7 @@ final monthlyTransactionsProvider = FutureProvider((ref) {
   final currentMonth = ref.watch(currentMonthProvider);
   return TransactionService().getTransactionsByMonth(currentYear, currentMonth);
 });
+
+final groupedTotalsProvider = FutureProvider((ref) {
+  return TransactionService().getGroupedTotals();
+});

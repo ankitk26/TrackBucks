@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 // ignore: implementation_imports
@@ -21,6 +22,9 @@ class TransactionService {
   PostgrestFilterBuilder getTransactionTotals() =>
       _supabase.rpc('get_transaction_totals');
 
+  PostgrestFilterBuilder getGroupedTotals() =>
+      _supabase.rpc('get_grouped_totals');
+
   getTransactionsByMonth(int year, int month) {
     final firstDayOfMonth = DateTime(year, month);
     final lastDayOfMonth = DateTime(year, month + 1, 0);
@@ -41,9 +45,10 @@ class TransactionService {
           'Content-type': 'application/json; charset=UTF-8',
         },
       );
-      print('refreshed');
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 
