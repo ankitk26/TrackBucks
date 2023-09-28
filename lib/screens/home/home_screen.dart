@@ -62,6 +62,7 @@ class HomeScreen extends ConsumerWidget {
           );
 
           await TransactionService().fetchNewTransactions();
+          ref.invalidate(monthlyTotalsProvider);
           if (context.mounted) {
             Navigator.of(context, rootNavigator: true).pop('dialog');
           }
