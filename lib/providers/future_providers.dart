@@ -19,3 +19,7 @@ final monthlyTransactionsProvider = FutureProvider((ref) {
 final groupedTotalsProvider = FutureProvider((ref) {
   return TransactionService().getGroupedTotals();
 });
+
+final searchProvider = FutureProvider.family<dynamic, String>((_, query) {
+  return TransactionService().getSearchResults(query);
+});

@@ -25,6 +25,13 @@ class TransactionService {
   PostgrestFilterBuilder getGroupedTotals() =>
       _supabase.rpc('get_grouped_totals');
 
+  PostgrestFilterBuilder getSearchResults(String searchText) => _supabase.rpc(
+        'search_transactions',
+        params: {
+          'search_text': searchText,
+        },
+      );
+
   getTransactionsByMonth(int year, int month) {
     final firstDayOfMonth = DateTime(year, month);
     final lastDayOfMonth = DateTime(year, month + 1, 0);

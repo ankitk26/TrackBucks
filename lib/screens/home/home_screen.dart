@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:trackbucks/config/config.dart';
 import 'package:trackbucks/models/models.dart';
 import 'package:trackbucks/providers/providers.dart';
+import 'package:trackbucks/screens/home/widgets/search_transactions_delegate.dart';
 import 'package:trackbucks/screens/screens.dart';
 import 'package:trackbucks/services/services.dart';
 import 'package:trackbucks/shared/widgets/widgets.dart';
@@ -26,6 +27,16 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text("Trackbucks", style: TextStyle(fontSize: 16)),
         centerTitle: true,
+        actions: [
+          IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: SearchTransactionsDelegate(),
+                );
+              }),
+        ],
         leading: IconButton(
           icon: const Icon(Icons.menu),
           onPressed: () {
@@ -82,7 +93,7 @@ class HomeScreen extends ConsumerWidget {
             ),
             data: (data) {
               final transactionList =
-                  data.map((e) => TransactionModel.fromJson(e));
+                  data.map((e) => TransactionModel.fromJson(e)).toList();
 
               if (transactionList.isEmpty) {
                 return const Center(
@@ -172,18 +183,7 @@ class HomeScreen extends ConsumerWidget {
                       ),
                       const Divider(),
                       const SizedBox(height: 16.0),
-                      Column(
-                          children: transactionList.map((transaction) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pushNamed(
-                              PayeeScreen.path,
-                              arguments: transaction.receiverUpi,
-                            );
-                          },
-                          child: TransactionItem(transaction: transaction),
-                        );
-                      }).toList())
+                      TransactionList(transactionList: transactionList)
                     ],
                   ),
                 ),
