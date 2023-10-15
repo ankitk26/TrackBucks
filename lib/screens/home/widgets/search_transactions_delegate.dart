@@ -76,7 +76,9 @@ class SearchTransactionsDelegate extends SearchDelegate {
                 dataJson.map((e) => TransactionModel.fromJson(e)).toList();
 
             final totalTransactionAmount = transactionList.fold<double>(
-                0, (previousValue, element) => previousValue + element.amount);
+              0,
+              (previousValue, element) => previousValue + element.amount,
+            );
             final totalTransactions = transactionList.length;
 
             return Padding(
@@ -100,13 +102,16 @@ class SearchTransactionsDelegate extends SearchDelegate {
                     PaperCard(
                       title: "Average Expense",
                       value: currencyFormatter(
-                          totalTransactionAmount / totalTransactions),
+                        totalTransactionAmount / totalTransactions,
+                      ),
                     ),
                     const SizedBox(height: 36.0),
                     const Text(
                       "Recent Transactions",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20.0),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      ),
                     ),
                     const Divider(),
                     const SizedBox(height: 16.0),

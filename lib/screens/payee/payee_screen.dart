@@ -41,9 +41,10 @@ class PayeeScreen extends StatelessWidget {
                     }
 
                     final totalTransactionAmount = transactionList.fold<double>(
-                        0,
-                        (previousValue, element) =>
-                            previousValue + element.amount);
+                      0,
+                      (previousValue, element) =>
+                          previousValue + element.amount,
+                    );
                     final totalTransactions = transactionList.length;
 
                     return Padding(
@@ -66,20 +67,24 @@ class PayeeScreen extends StatelessWidget {
                             PaperCard(
                               title: "Average Expense",
                               value: currencyFormatter(
-                                  totalTransactionAmount / totalTransactions),
+                                totalTransactionAmount / totalTransactions,
+                              ),
                             ),
                             const SizedBox(height: 36.0),
                             const Text(
                               "Recent Transactions",
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20.0),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              ),
                             ),
                             const Divider(),
                             const SizedBox(height: 16.0),
                             Column(
                               children: transactionList.map((transaction) {
                                 return TransactionItem(
-                                    transaction: transaction);
+                                  transaction: transaction,
+                                );
                               }).toList(),
                             )
                           ],

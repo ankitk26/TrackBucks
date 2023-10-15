@@ -90,7 +90,8 @@ class InsightsScreen extends StatelessWidget {
                                             const SizedBox(width: 16.0),
                                             Text(
                                               currencyFormatter(
-                                                  transaction.totalAmount),
+                                                transaction.totalAmount,
+                                              ),
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 16.0,

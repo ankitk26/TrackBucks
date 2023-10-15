@@ -29,13 +29,14 @@ class HomeScreen extends ConsumerWidget {
         centerTitle: true,
         actions: [
           IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {
-                showSearch(
-                  context: context,
-                  delegate: SearchTransactionsDelegate(),
-                );
-              }),
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: SearchTransactionsDelegate(),
+              );
+            },
+          ),
         ],
         leading: IconButton(
           icon: const Icon(Icons.menu),
@@ -105,13 +106,16 @@ class HomeScreen extends ConsumerWidget {
               final currentYear = DateTime.now().year;
 
               final todayTotalTransactionsAmount = transactionList
-                  .where((element) =>
-                      DateFormat("ddMMyyyy").format(element.transactionDate) ==
-                      DateFormat("ddMMyyyy").format(DateTime.now()))
+                  .where(
+                    (element) =>
+                        DateFormat("ddMMyyyy")
+                            .format(element.transactionDate) ==
+                        DateFormat("ddMMyyyy").format(DateTime.now()),
+                  )
                   .fold<double>(
-                      0,
-                      (previousValue, element) =>
-                          previousValue + element.amount);
+                    0,
+                    (previousValue, element) => previousValue + element.amount,
+                  );
 
               return Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -151,9 +155,11 @@ class HomeScreen extends ConsumerWidget {
                                   .toList();
 
                               final currentMonthTotal =
-                                  monthlyTransactions.where((e) =>
-                                      e.year == currentYear &&
-                                      e.month == currentMonth);
+                                  monthlyTransactions.where(
+                                (e) =>
+                                    e.year == currentYear &&
+                                    e.month == currentMonth,
+                              );
 
                               return GestureDetector(
                                 onTap: () {
@@ -164,10 +170,11 @@ class HomeScreen extends ConsumerWidget {
                                 },
                                 child: PaperCard(
                                   title: "Your Expenses this Month",
-                                  value: currencyFormatter(currentMonthTotal
-                                          .isEmpty
-                                      ? 0
-                                      : currentMonthTotal.first.totalAmount),
+                                  value: currencyFormatter(
+                                    currentMonthTotal.isEmpty
+                                        ? 0
+                                        : currentMonthTotal.first.totalAmount,
+                                  ),
                                 ),
                               );
                             },

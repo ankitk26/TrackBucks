@@ -8,10 +8,11 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class TransactionService {
   final _supabase = Supabase.instance.client;
 
-  SupabaseStreamBuilder get allTransactions => _supabase
-      .from('transactions')
-      .stream(primaryKey: ['upi_ref_id']).order('transaction_date',
-          ascending: false);
+  SupabaseStreamBuilder get allTransactions =>
+      _supabase.from('transactions').stream(primaryKey: ['upi_ref_id']).order(
+        'transaction_date',
+        ascending: false,
+      );
 
   SupabaseStreamBuilder getTransactionsByUpi(String upiId) => _supabase
       .from('transactions')

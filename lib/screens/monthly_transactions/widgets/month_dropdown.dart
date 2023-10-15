@@ -46,10 +46,12 @@ class MonthDropdowns extends ConsumerWidget {
                 ),
                 value: currentYear,
                 items: years
-                    .map((year) => DropdownMenuItem(
-                          value: year,
-                          child: Text(year.toString()),
-                        ))
+                    .map(
+                      (year) => DropdownMenuItem(
+                        value: year,
+                        child: Text(year.toString()),
+                      ),
+                    )
                     .toList(),
                 onChanged: (newValue) {
                   final newYear = newValue as int;

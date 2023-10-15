@@ -47,9 +47,11 @@ class MonthlyTransactionsScreen extends StatelessWidget {
                             final dataJson = data as List<dynamic>;
                             final currentMonthExpenses = dataJson
                                 .map((e) => MonthlySumModel.fromJson(e))
-                                .where((element) =>
-                                    element.year == currentYear &&
-                                    element.month == currentMonth)
+                                .where(
+                                  (element) =>
+                                      element.year == currentYear &&
+                                      element.month == currentMonth,
+                                )
                                 .toList();
 
                             if (currentMonthExpenses.isEmpty) {
@@ -57,9 +59,11 @@ class MonthlyTransactionsScreen extends StatelessWidget {
                             }
 
                             return PaperCard(
-                                title: "Expenses this month",
-                                value: currencyFormatter(
-                                    currentMonthExpenses[0].totalAmount));
+                              title: "Expenses this month",
+                              value: currencyFormatter(
+                                currentMonthExpenses[0].totalAmount,
+                              ),
+                            );
                           },
                           loading: () => Container(
                             width: double.infinity,
@@ -98,16 +102,19 @@ class MonthlyTransactionsScreen extends StatelessWidget {
 
                             return Column(
                               children: transactions
-                                  .map((transaction) => GestureDetector(
-                                        onTap: () {
-                                          Navigator.of(context).pushNamed(
-                                            PayeeScreen.path,
-                                            arguments: transaction.receiverUpi,
-                                          );
-                                        },
-                                        child: TransactionItem(
-                                            transaction: transaction),
-                                      ))
+                                  .map(
+                                    (transaction) => GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).pushNamed(
+                                          PayeeScreen.path,
+                                          arguments: transaction.receiverUpi,
+                                        );
+                                      },
+                                      child: TransactionItem(
+                                        transaction: transaction,
+                                      ),
+                                    ),
+                                  )
                                   .toList(),
                             );
                           },

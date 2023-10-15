@@ -15,18 +15,19 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: transactionList.map((transaction) {
-      return canTap
-          ? GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushNamed(
-                  PayeeScreen.path,
-                  arguments: transaction.receiverUpi,
-                );
-              },
-              child: TransactionItem(transaction: transaction),
-            )
-          : TransactionItem(transaction: transaction);
-    }).toList());
+      children: transactionList.map((transaction) {
+        return canTap
+            ? GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                    PayeeScreen.path,
+                    arguments: transaction.receiverUpi,
+                  );
+                },
+                child: TransactionItem(transaction: transaction),
+              )
+            : TransactionItem(transaction: transaction);
+      }).toList(),
+    );
   }
 }
