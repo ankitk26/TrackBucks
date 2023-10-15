@@ -179,11 +179,16 @@ class HomeScreen extends ConsumerWidget {
                       const Text(
                         "Recent Transactions",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20.0),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0,
+                        ),
                       ),
                       const Divider(),
                       const SizedBox(height: 16.0),
-                      TransactionList(transactionList: transactionList)
+                      TransactionList(
+                        transactionList: transactionList,
+                        canTap: true,
+                      ),
                     ],
                   ),
                 ),
