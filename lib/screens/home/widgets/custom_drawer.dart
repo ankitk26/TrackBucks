@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trackbucks/screens/insights/insights_screen.dart';
 import 'package:trackbucks/screens/screens.dart';
 
 class CustomDrawer extends StatelessWidget {
