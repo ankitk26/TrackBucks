@@ -128,19 +128,6 @@ class HomeScreen extends ConsumerWidget {
                         title: "Your Expenses Today",
                         value: currencyFormatter(todayTotalTransactionsAmount),
                         cardColor: Palette.primary,
-                        icon: CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Palette.foreground,
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                context,
-                                AddTransactionScreen.path,
-                              );
-                            },
-                            icon: const Icon(Icons.add),
-                          ),
-                        ),
                       ),
                       const SizedBox(height: 16.0),
                       Consumer(

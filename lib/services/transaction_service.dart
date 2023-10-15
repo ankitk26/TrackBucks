@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 // ignore: implementation_imports
 import 'package:supabase/src/supabase_stream_builder.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:trackbucks/config/config.dart';
 
 class TransactionService {
   final _supabase = Supabase.instance.client;
@@ -48,7 +49,7 @@ class TransactionService {
   Future<void> fetchNewTransactions() async {
     try {
       await http.post(
-        Uri.parse("https://upi-transactions-api.vercel.app/new-transactions"),
+        Uri.parse(transactionsAPIEndpoint),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
