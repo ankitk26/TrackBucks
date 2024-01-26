@@ -17,8 +17,9 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             title: const Text("Monthly Expenses"),
             onTap: () {
-              Navigator.of(context)
-                  .popAndPushNamed(MonthlyTransactionsScreen.path);
+              Navigator.of(context).popAndPushNamed(
+                MonthlyTransactionsScreen.path,
+              );
             },
           ),
           ListTile(

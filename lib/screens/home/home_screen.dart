@@ -66,7 +66,7 @@ class HomeScreen extends ConsumerWidget {
                       children: [
                         CircularProgressIndicator(
                           color: Palette.secondary,
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -105,7 +105,7 @@ class HomeScreen extends ConsumerWidget {
               final currentMonth = DateTime.now().month;
               final currentYear = DateTime.now().year;
 
-              final todayTotalTransactionsAmount = transactionList
+              final currentDayTransactionsTotalAmount = transactionList
                   .where(
                     (element) =>
                         DateFormat("ddMMyyyy")
@@ -126,7 +126,9 @@ class HomeScreen extends ConsumerWidget {
                     children: [
                       PaperCard(
                         title: "Your Expenses Today",
-                        value: currencyFormatter(todayTotalTransactionsAmount),
+                        value: currencyFormatter(
+                          currentDayTransactionsTotalAmount,
+                        ),
                         cardColor: Palette.primary,
                       ),
                       const SizedBox(height: 16.0),

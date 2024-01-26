@@ -5,9 +5,3 @@ final transactionsProvider = StreamProvider((ref) {
   final transactions = TransactionService().allTransactions;
   return transactions;
 });
-
-final payeeProvider = StreamProvider.family((ref, upiId) {
-  final transactionsByUpi =
-      TransactionService().getTransactionsByUpi(upiId.toString());
-  return transactionsByUpi;
-});

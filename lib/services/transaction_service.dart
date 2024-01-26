@@ -9,17 +9,38 @@ import 'package:trackbucks/config/config.dart';
 class TransactionService {
   final _supabase = Supabase.instance.client;
 
-  SupabaseStreamBuilder get allTransactions =>
-      _supabase.from('transactions').stream(primaryKey: ['upi_ref_id']).order(
+  SupabaseStreamBuilder get allTransactions => _supabase
+          .from('transactions')
+          .stream(primaryKey: ['transaction_key']).order(
         'transaction_date',
         ascending: false,
       );
 
-  SupabaseStreamBuilder getTransactionsByUpi(String upiId) => _supabase
-      .from('transactions')
-      .stream(primaryKey: ['upi_ref_id'])
-      .eq('receiver_upi', upiId)
-      .order('transaction_date', ascending: false);
+  PostgrestTransformBuilder getTransactionsByUpi(
+      String upiId, int year, int month,) {
+    try {
+      int lastday = DateTime(year, month == 12 ? 1 : month + 1, 0).day;
+
+      final x = _supabase
+          .from('transactions')
+          .select('*')
+          .gte('transaction_date', '$year-$month-01 00:00:00+00')
+          .lte('transaction_date', '$year-$month-$lastday 23:59:59+00')
+          // .stream(primaryKey: ['transaction_key'])
+          .eq('receiver_upi', upiId)
+          .order('transaction_date', ascending: false);
+
+      return x;
+    } catch (e) {
+      return _supabase
+          .from('transactions')
+          .select('*')
+          // .rangeAdjacent('transaction_date', '[2023-12-01, 2023-12-31]')
+          // .stream(primaryKey: ['transaction_key'])
+          .eq('receiver_upi', upiId)
+          .order('transaction_date', ascending: false);
+    }
+  }
 
   PostgrestFilterBuilder getTransactionTotals() =>
       _supabase.rpc('get_transaction_totals');

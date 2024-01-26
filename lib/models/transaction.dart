@@ -4,7 +4,8 @@ class TransactionModel {
   String receiverUpi;
   String senderUpi;
   DateTime transactionDate;
-  int upiRefId;
+  String? upiRefId;
+  int transactionKey;
 
   TransactionModel({
     required this.amount,
@@ -12,7 +13,8 @@ class TransactionModel {
     required this.receiverUpi,
     required this.senderUpi,
     required this.transactionDate,
-    required this.upiRefId,
+    this.upiRefId,
+    required this.transactionKey,
   });
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
@@ -22,7 +24,8 @@ class TransactionModel {
         receiverUpi: json["receiver_upi"],
         senderUpi: json["sender_upi"],
         transactionDate: DateTime.parse(json["transaction_date"]),
-        upiRefId: json["upi_ref_id"],
+        upiRefId: (json["upi_ref_id"] ?? "").toString(),
+        transactionKey: json["transaction_key"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -32,5 +35,6 @@ class TransactionModel {
         "sender_upi": senderUpi,
         "transaction_date": transactionDate.toIso8601String(),
         "upi_ref_id": upiRefId,
+        "transaction_key": transactionKey,
       };
 }

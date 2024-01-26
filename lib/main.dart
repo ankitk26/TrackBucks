@@ -13,11 +13,11 @@ void main() async {
     url: dotenv.get('SUPABASE_URL'),
     anonKey: dotenv.get('SUPABASE_KEY'),
   );
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: RootApp()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class RootApp extends StatelessWidget {
+  const RootApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +27,6 @@ class MyApp extends StatelessWidget {
         theme: appTheme,
         home: const HomeScreen(),
         onGenerateRoute: generateRoutes,
-        routes: {
-          InsightsScreen.path: (context) => const InsightsScreen(),
-          MonthlyTransactionsScreen.path: (context) =>
-              const MonthlyTransactionsScreen(),
-          AddTransactionScreen.path: (context) => const AddTransactionScreen(),
-        },
       ),
     );
   }

@@ -23,3 +23,11 @@ final groupedTotalsProvider = FutureProvider((ref) {
 final searchProvider = FutureProvider.family<dynamic, String>((_, query) {
   return TransactionService().getSearchResults(query);
 });
+
+final payeeProvider = FutureProvider.family((ref, upiId) async {
+  final yearSelected = ref.watch(currentYearProvider);
+  final monthSelected = ref.watch(currentMonthProvider);
+  final transactionsByUpi = await TransactionService()
+      .getTransactionsByUpi(upiId.toString(), yearSelected, monthSelected);
+  return transactionsByUpi;
+});

@@ -1,11 +1,9 @@
-import "package:flutter/material.dart";
 import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:trackbucks/models/models.dart";
 
+// Get secret values
 final myUpi = dotenv.get('UPI');
 final transactionsAPIEndpoint = dotenv.get('TRANSACTIONS_DATA_API');
-
-const appGreen = Color(0xffCAFAC4);
 
 final years = MonthModel(monthName: '2023', monthNumber: 2023);
 
@@ -25,3 +23,5 @@ final months = [
 ];
 
 enum TransactionType { send, receive }
+
+enum FilterType { yearly, monthly }
