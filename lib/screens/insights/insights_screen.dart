@@ -77,11 +77,24 @@ class InsightsScreen extends StatelessWidget {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(
-                                                    transaction.payeeName,
-                                                    style: const TextStyle(
-                                                      fontSize: 15.0,
-                                                    ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        transaction.payeeName,
+                                                        style: const TextStyle(
+                                                          fontSize: 15.0,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        "${transaction.transactionsCount} transaction${transaction.transactionsCount > 1 ? "s" : ""}",
+                                                        style: const TextStyle(
+                                                          color: Colors.grey,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                   const SizedBox(height: 4),
                                                 ],

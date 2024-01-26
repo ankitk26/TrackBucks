@@ -48,8 +48,12 @@ class TransactionService {
   PostgrestFilterBuilder getTransactionTotals() =>
       _supabase.rpc('get_transaction_totals');
 
-  PostgrestFilterBuilder getGroupedTotals() =>
-      _supabase.rpc('get_grouped_totals');
+  PostgrestFilterBuilder getGroupedTotals(int year, int month) => _supabase.rpc(
+        'get_grouped_totals',
+        params: {
+          'p_year': year,
+        },
+      );
 
   PostgrestFilterBuilder getSearchResults(String searchText) {
     return _supabase.rpc(
