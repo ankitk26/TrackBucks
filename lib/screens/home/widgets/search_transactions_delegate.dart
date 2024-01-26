@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trackbucks/config/config.dart';
@@ -27,7 +29,7 @@ class SearchTransactionsDelegate extends SearchDelegate {
           query = '';
         },
         icon: const Icon(Icons.clear),
-      )
+      ),
     ];
   }
 
@@ -51,7 +53,7 @@ class SearchTransactionsDelegate extends SearchDelegate {
             child: Text(
               "Search term must be longer than two letters.",
             ),
-          )
+          ),
         ],
       );
     }
@@ -74,7 +76,6 @@ class SearchTransactionsDelegate extends SearchDelegate {
 
             final transactionList =
                 dataJson.map((e) => TransactionModel.fromJson(e)).toList();
-
             final totalTransactionAmount = transactionList.fold<double>(
               0,
               (previousValue, element) => previousValue + element.amount,

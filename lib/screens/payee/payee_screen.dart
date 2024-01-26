@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trackbucks/config/config.dart';
@@ -41,7 +43,8 @@ class PayeeScreen extends StatelessWidget {
                       final transactionList = jsonData
                           .map((e) => TransactionModel.fromJson(e))
                           .toList();
-                      print(transactionList);
+
+                      log(transactionList.toString());
 
                       if (transactionList.isEmpty) {
                         return const Center(

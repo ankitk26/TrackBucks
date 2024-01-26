@@ -17,15 +17,18 @@ class TransactionService {
       );
 
   PostgrestTransformBuilder getTransactionsByUpi(
-      String upiId, int year, int month,) {
+    String upiId,
+    int year,
+    int month,
+  ) {
     try {
-      int lastday = DateTime(year, month == 12 ? 1 : month + 1, 0).day;
+      // int lastday = DateTime(year, month == 12 ? 1 : month + 1, 0).day;
 
       final x = _supabase
           .from('transactions')
           .select('*')
-          .gte('transaction_date', '$year-$month-01 00:00:00+00')
-          .lte('transaction_date', '$year-$month-$lastday 23:59:59+00')
+          // .gte('transaction_date', '$year-$month-01 00:00:00+00')
+          // .lte('transaction_date', '$year-$month-$lastday 23:59:59+00')
           // .stream(primaryKey: ['transaction_key'])
           .eq('receiver_upi', upiId)
           .order('transaction_date', ascending: false);
@@ -48,12 +51,14 @@ class TransactionService {
   PostgrestFilterBuilder getGroupedTotals() =>
       _supabase.rpc('get_grouped_totals');
 
-  PostgrestFilterBuilder getSearchResults(String searchText) => _supabase.rpc(
-        'search_transactions',
-        params: {
-          'search_text': searchText,
-        },
-      );
+  PostgrestFilterBuilder getSearchResults(String searchText) {
+    return _supabase.rpc(
+      'search_transactions',
+      params: {
+        'search_text': searchText,
+      },
+    );
+  }
 
   getTransactionsByMonth(int year, int month) {
     final firstDayOfMonth = DateTime(year, month);
