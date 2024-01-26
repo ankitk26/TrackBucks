@@ -12,7 +12,7 @@ final appTheme = ThemeData.dark().copyWith(
     backgroundColor: Palette.background,
   ),
   dividerColor: Palette.secondary,
-  textTheme: GoogleFonts.workSansTextTheme(ThemeData.dark().textTheme),
+  textTheme: GoogleFonts.spaceMonoTextTheme(ThemeData.dark().textTheme),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: Palette.primary,
     foregroundColor: Palette.foreground,

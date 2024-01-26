@@ -18,7 +18,7 @@ class MonthlyTransactionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Monthly Expenses"),
+        title: const Text("Monthly Expenses", style: TextStyle(fontSize: 16)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

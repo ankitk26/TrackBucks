@@ -16,7 +16,7 @@ class InsightsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Insights"),
+        title: const Text("Insights", style: TextStyle(fontSize: 16)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
