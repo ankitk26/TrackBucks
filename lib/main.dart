@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:trackbucks/config/config.dart';
 import 'package:trackbucks/screens/screens.dart';
@@ -24,7 +25,11 @@ class RootApp extends StatelessWidget {
     return SafeArea(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: appTheme,
+        theme: appTheme.copyWith(
+          textTheme: GoogleFonts.poppinsTextTheme(
+            ThemeData.dark().textTheme,
+          ),
+        ),
         home: const HomeScreen(),
         onGenerateRoute: generateRoutes,
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'palette.dart';
 
@@ -12,7 +11,6 @@ final appTheme = ThemeData.dark().copyWith(
     backgroundColor: Palette.background,
   ),
   dividerColor: Palette.secondary,
-  textTheme: GoogleFonts.spaceMonoTextTheme(ThemeData.dark().textTheme),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: Palette.primary,
     foregroundColor: Palette.foreground,

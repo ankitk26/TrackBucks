@@ -17,6 +17,40 @@ class HomeScreen extends ConsumerWidget {
 
   static const path = '/';
 
+  void loadNewTransactions(context, ref) async {
+    showDialog(
+      context: context,
+      builder: ((context) => AlertDialog(
+            backgroundColor: Palette.background,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
+            contentPadding: const EdgeInsets.all(40),
+            title: const Center(
+              child: Text(
+                "Loading new transactions",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CircularProgressIndicator(
+                    color: Palette.secondary,
+                  ),
+                ],
+              ),
+            ),
+          )),
+    );
+
+    await TransactionService().fetchNewTransactions();
+    ref.invalidate(monthlyTotalsProvider);
+    if (context.mounted) {
+      Navigator.of(context, rootNavigator: true).pop('dialog');
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final drawerKey = ref.watch(drawerKeyProvider);
@@ -47,37 +81,7 @@ class HomeScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          showDialog(
-            context: context,
-            builder: ((context) => AlertDialog(
-                  backgroundColor: Palette.background,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
-                  contentPadding: const EdgeInsets.all(40),
-                  title: const Center(
-                    child: Text(
-                      "Loading new transactions",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  ),
-                  content: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        CircularProgressIndicator(
-                          color: Palette.secondary,
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-          );
-
-          await TransactionService().fetchNewTransactions();
-          ref.invalidate(monthlyTotalsProvider);
-          if (context.mounted) {
-            Navigator.of(context, rootNavigator: true).pop('dialog');
-          }
+          loadNewTransactions(context, ref);
         },
         child: const Icon(Icons.refresh),
       ),
