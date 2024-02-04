@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:trackbucks/features/transactions/data/repositories/transaction_repository_impl.dart';
+import 'package:trackbucks/features/transactions/business/repositories/transaction_repository_impl.dart';
 import 'package:trackbucks/features/transactions/domain/models/export.dart';
 import 'package:trackbucks/features/transactions/presentation/providers/state_providers.dart';
 
