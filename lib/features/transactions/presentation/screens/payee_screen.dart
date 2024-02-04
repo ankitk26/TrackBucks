@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trackbucks/config/config.dart';
@@ -37,8 +35,6 @@ class PayeeScreen extends StatelessWidget {
                   final payeeTransactions = ref.watch(payeeProvider(upiId));
                   return payeeTransactions.when(
                     data: (transactionList) {
-                      log(transactionList.toString());
-
                       if (transactionList.isEmpty) {
                         return const Center(
                           child: Text("No transactions"),

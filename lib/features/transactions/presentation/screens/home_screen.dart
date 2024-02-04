@@ -42,6 +42,7 @@ class HomeScreen extends ConsumerWidget {
 
     await TransactionRepositoryImpl().loadNewTransactions();
     ref.invalidate(monthlyTotalsProvider);
+    ref.invalidate(allTransactionsProvider);
     if (context.mounted) {
       Navigator.of(context, rootNavigator: true).pop('dialog');
     }
@@ -86,8 +87,8 @@ class HomeScreen extends ConsumerWidget {
           final transactions = ref.watch(allTransactionsProvider);
 
           return transactions.when(
-            error: (err, trace) => const Center(
-              child: Text("Some error occured"),
+            error: (err, trace) => Center(
+              child: Text("$err"),
             ),
             loading: () => Center(
               child: CircularProgressIndicator(color: Palette.secondary),

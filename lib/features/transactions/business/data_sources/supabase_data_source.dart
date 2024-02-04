@@ -14,10 +14,11 @@ class SupabaseDataSourceImpl implements SupabaseDataSource {
 
   @override
   PostgrestTransformBuilder getAllTransactions() {
-    return _supabase.from('transactions').select('*').order(
+    final data = _supabase.from('transactions').select('*').order(
           'transaction_date',
           ascending: false,
         );
+    return data;
   }
 
   @override

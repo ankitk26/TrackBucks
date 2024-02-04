@@ -8,7 +8,7 @@ class TransactionRepositoryImpl implements TransactionRepository {
 
   @override
   Future<List<Transaction>> getAllTransactions() async {
-    final results = await supabaseDataSource.getAllTransactions();
+    final List<dynamic> results = await supabaseDataSource.getAllTransactions();
     return results.map((e) => Transaction.fromJson(e)).toList();
   }
 
