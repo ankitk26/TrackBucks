@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trackbucks/features/auth/business/repositories/auth_repository_impl.dart';
 import 'package:trackbucks/features/transactions/presentation/screens/insights_screen.dart';
 import 'package:trackbucks/features/transactions/presentation/screens/monthly_transactions_scren.dart';
 
@@ -27,6 +28,12 @@ class CustomDrawer extends StatelessWidget {
             title: const Text("Insights"),
             onTap: () {
               Navigator.of(context).popAndPushNamed(InsightsScreen.path);
+            },
+          ),
+          ListTile(
+            title: const Text("Log out"),
+            onTap: () async {
+              await AuthRepositoryImpl().logout();
             },
           ),
         ],

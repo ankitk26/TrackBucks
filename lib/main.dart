@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:trackbucks/config/config.dart';
+import 'package:trackbucks/features/auth/presentation/providers/stream_providers.dart';
+import 'package:trackbucks/features/auth/presentation/screens/login_screen.dart';
 import 'package:trackbucks/features/transactions/presentation/screens/export.dart';
 import 'package:trackbucks/utils/utils.dart';
 
@@ -30,7 +32,23 @@ class RootApp extends StatelessWidget {
             ThemeData.dark().textTheme,
           ),
         ),
-        home: const HomeScreen(),
+        home: Consumer(
+          builder: (context, ref, child) {
+            final authStateProviderValue = ref.watch(authStateProvider);
+
+            return authStateProviderValue.when(
+              data: (data) {
+                if (data.session != null) {
+                  return const HomeScreen();
+                }
+
+                return const LoginScreen();
+              },
+              error: (err, trace) => Text('$err'),
+              loading: () => const LoginScreen(),
+            );
+          },
+        ),
         onGenerateRoute: generateRoutes,
       ),
     );
