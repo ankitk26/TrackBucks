@@ -46,10 +46,10 @@ class TransactionService {
   }
 
   PostgrestFilterBuilder getTransactionTotals() =>
-      _supabase.rpc('get_transaction_totals');
+      _supabase.rpc('get_monthly_totals');
 
   PostgrestFilterBuilder getGroupedTotals(int year, int month) => _supabase.rpc(
-        'get_grouped_totals',
+        'get_payee_insights',
         params: {
           'p_year': year,
         },

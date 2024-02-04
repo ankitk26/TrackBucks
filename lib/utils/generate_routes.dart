@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:trackbucks/screens/screens.dart';
+import 'package:trackbucks/features/transactions/presentation/screens/insights_screen.dart';
+import 'package:trackbucks/features/transactions/presentation/screens/monthly_transactions_scren.dart';
+import 'package:trackbucks/features/transactions/presentation/screens/payee_screen.dart';
 
 Route<dynamic>? generateRoutes(RouteSettings settings) {
   switch (settings.name) {
