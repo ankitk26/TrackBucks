@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:http/http.dart' as http;
 import 'package:trackbucks/config/config.dart';
 
@@ -18,7 +16,6 @@ class ApiDataSourceImpl implements ApiDataSource {
         },
       );
     } catch (e) {
-      log(e.toString());
       throw Exception("Transactions could not be loaded");
     }
   }
